@@ -47,7 +47,7 @@ class TaskController extends GetxController {
     notifyHelper.initialize();
   }
 
-  Future<int?> addTask(Task task) {
+  Future<int?> addTask() {
     task = initTask();
     return dbHelper.insert(task);
   }

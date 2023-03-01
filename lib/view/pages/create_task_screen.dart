@@ -7,11 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 import 'package:to_do_app/core/services/notification_services.dart';
 import 'package:to_do_app/core/view%20model/task_controller.dart';
-import 'package:to_do_app/models/task.dart';
 import 'package:to_do_app/view/components/button.dart';
 
 import '../components/input_field.dart';
@@ -262,29 +260,29 @@ class CreateTaskScreen extends GetWidget<TaskController> {
 
   AwesomeDialog _buildAwesomeDialog(context, int value) {
     return AwesomeDialog(
-          context: context,
-          dialogType: DialogType.success,
-          animType: AnimType.rightSlide,
-          title: 'Success',
-          desc: 'Your task is beging',
-          descTextStyle: TextStyle(color: Colors.black),
-          btnCancelText: 'add more',
-          btnOkText: 'main Menu',
-          btnCancelOnPress: () {
-            controller.titleCN.clear();
-            controller.noteCN.clear();
-            task.setId = value;
-            NotifyHelper().showScheduleNotification(task);
-          },
-          btnOkOnPress: () {
-            task.setId = value;
-            NotifyHelper().showScheduleNotification(task);
-            Navigator.pop(context);
-          },
-        );
+      context: context,
+      dialogType: DialogType.success,
+      animType: AnimType.rightSlide,
+      title: 'Success',
+      desc: 'Your task is beging',
+      descTextStyle: TextStyle(color: Colors.black),
+      btnCancelText: 'add more',
+      btnOkText: 'main Menu',
+      btnCancelOnPress: () {
+        controller.titleCN.clear();
+        controller.noteCN.clear();
+        controller.task.setId = value;
+        NotifyHelper().showScheduleNotification(controller.task);
+      },
+      btnOkOnPress: () {
+        controller.task.setId = value;
+        NotifyHelper().showScheduleNotification(controller.task);
+        Navigator.pop(context);
+      },
+    );
   }
 
   Future<int?> _createTask() async {
-    return await controller.addTask(task);
+    return await controller.addTask();
   }
 }
